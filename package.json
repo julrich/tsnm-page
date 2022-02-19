@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@backlight-dev/selection-inventory-n5vl9.blank-kztxz1qm": "^0.0.1",
+    "@backlight-dev/selection-inventory-n5vl9.blank-kztxz1qm": "^0.0.4",
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
