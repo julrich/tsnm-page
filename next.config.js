@@ -13,6 +13,9 @@ const withTM = require("next-transpile-modules")([
 const nextConfig = withTM(
   withBundleAnalyzer({
     reactStrictMode: true,
+    images: {
+      domains: ['i1.sndcdn.com'],
+    },
     generateBuildId: () => "build",
   })
 );

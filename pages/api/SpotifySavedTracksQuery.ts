@@ -22,8 +22,6 @@ exports.handler = async (req: NextApiRequest, res: NextApiResponse) => {
     console.error(JSON.stringify(errors, null, 2));
   }
 
-  console.log(JSON.stringify(data, null, 2));
-
   res.setHeader("Content-Type", "application/json");
 
   return res.status(200).json({
