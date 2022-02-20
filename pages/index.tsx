@@ -4,7 +4,7 @@ import Head from "next/head";
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import { Button } from '@backlight-dev/selection-inventory-n5vl9.blank-kztxz1qm/button/dist/Button.js';
-import { TeaserBox } from '@backlight-dev/selection-inventory-n5vl9.blank-kztxz1qm/teaser-box/dist/TeaserBox.js';
+// import { TeaserBox } from '@backlight-dev/selection-inventory-n5vl9.blank-kztxz1qm/teaser-box/dist/TeaserBox.js';
 
 //@ts-ignore
 const Home: NextPage = ({ data }: { data: NetlifyGraph.SpotifySavedTracksQuery['data'] }) => {
@@ -26,12 +26,10 @@ const Home: NextPage = ({ data }: { data: NetlifyGraph.SpotifySavedTracksQuery['
 
         <div className={styles.grid}>
           {data?.spotify?.me?.savedTracks?.nodes.map((track: any, index: number) =>
-            <TeaserBox
-              key={index}
-              topic={`Artists: ${track.artists.map((artist: any) => artist.name).join(', ')}`}
-              text={`Track: ${track.name}`}
-              darkStyle
-            />
+            <div key={index}>
+              <span>Artists: {track.artists.map((artist: any) => artist.name).join(', ')}</span>
+              <span>Track: {track.name}</span>
+            </div>
           )}
         </div>
       </main>
