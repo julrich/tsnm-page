@@ -45,6 +45,8 @@ export async function getServerSideProps({ req }: any) {
     { accessToken: accessToken }
   );
 
+  console.log('getServerSideProps', errors, data);
+
   return {
     props: {
       data,
