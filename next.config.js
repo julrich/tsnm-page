@@ -16,6 +16,7 @@ const nextConfig = withTM(
     images: {
       domains: ['i1.sndcdn.com'],
     },
+    target: 'serverless',
     generateBuildId: () => "build",
   })
 );

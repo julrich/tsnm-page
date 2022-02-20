@@ -37,7 +37,7 @@ const Home: NextPage = ({ data }: { data: NetlifyGraph.SpotifySavedTracksQuery['
   )
 }
   
-export async function getServerSideProps({ req }: any) {
+export async function getStaticProps({ req }: any) {
   const accessToken = process.env.NETLIFY_GRAPH_TOKEN;
 
   const { errors, data } = await NetlifyGraph.fetchSpotifySavedTracksQuery(
@@ -45,8 +45,8 @@ export async function getServerSideProps({ req }: any) {
     { accessToken: accessToken }
   );
 
-  console.log('getServerSideProps', errors, data);
-  console.log(`AccessToken length": ${(accessToken || "").length}`);
+  console.log('getStaticProps', errors, data);
+  console.log(`AccessToken length: ${(accessToken || "").length}`);
 
   return {
     props: {
