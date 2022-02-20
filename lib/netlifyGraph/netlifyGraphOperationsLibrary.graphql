@@ -1,0 +1,29 @@
+query ExampleQuery @netlify(id: """b4a7b1c9-bda4-4caf-9760-7a61329dfe6f""", doc: """An example query to start with.""") {
+  spotify {
+    me {
+      savedTracks {
+        nodes {
+          name
+          artists {
+            name
+          }
+        }
+      }
+    }
+  }
+}
+
+query SpotifySavedTracksQuery @netlify(id: """c108b4da-e020-47a5-8208-0cab9030cadb""", doc: """An empty query to start from""") {
+  spotify {
+    me {
+      savedTracks {
+        nodes {
+          name
+          artists {
+            name
+          }
+        }
+      }
+    }
+  }
+}

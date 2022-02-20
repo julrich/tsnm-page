@@ -11,6 +11,7 @@
   "dependencies": {
     "@backlight-dev/selection-inventory-n5vl9.blank-kztxz1qm": "^0.0.4",
     "@next/bundle-analyzer": "^12.1.0",
+    "netlify-graph-auth": "^0.0.3",
     "next": "12.1.0",
     "next-transpile-modules": "^9.0.0",
     "react": "17.0.2",

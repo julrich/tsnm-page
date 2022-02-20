@@ -1912,6 +1912,11 @@ natural-compare@^1.4.0:
   resolved "https://registry.npmjs.org/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
+netlify-graph-auth@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.npmjs.org/netlify-graph-auth/-/netlify-graph-auth-0.0.3.tgz#c674bdd3c18a41ddc7486a15a74f6533bdcba752"
+  integrity sha512-j7EMytLFCKAJqwGhGiWwwHzDPRdt82Ntzg3xZkDd96SJ1HQxa1lLI2V62DB8gIPM4VvPWANgmhhm70iqcXZF2g==
+
 next-transpile-modules@^9.0.0:
   version "9.0.0"
   resolved "https://registry.npmjs.org/next-transpile-modules/-/next-transpile-modules-9.0.0.tgz#133b1742af082e61cc76b02a0f12ffd40ce2bf90"
