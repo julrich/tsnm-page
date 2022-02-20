@@ -1,3 +1,3 @@
-declare module "@backlight-dev/selection-inventory-n5vl9.blank-kztxz1qm";
-declare module "@backlight-dev/selection-inventory-n5vl9.blank-kztxz1qm/button/dist/Button.js";
-declare module "@backlight-dev/selection-inventory-n5vl9.blank-kztxz1qm/teaser-box/dist/TeaserBox.js";
+declare module "@backlight-dev/selection-inventory-n5vl9.tsnm-ds";
+declare module "@backlight-dev/selection-inventory-n5vl9.tsnm-ds/button/dist/Button.js";
+declare module "@backlight-dev/selection-inventory-n5vl9.tsnm-ds/teaser-box/dist/TeaserBox.js";

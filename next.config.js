@@ -6,7 +6,7 @@ const withTM = require("next-transpile-modules")([
   "@kickstartds/base",
   "@kickstartds/content",
   "@kickstartds/blog",
-  "@backlight-dev/selection-inventory-n5vl9.blank-kztxz1qm",
+  "@backlight-dev/selection-inventory-n5vl9.tsnm-ds",
 ]);
 
 /** @type {import('next').NextConfig} */

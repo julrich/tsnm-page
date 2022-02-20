@@ -3,8 +3,8 @@ import type { NextPage } from 'next';
 import Head from "next/head";
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import { Button } from '@backlight-dev/selection-inventory-n5vl9.blank-kztxz1qm/button/dist/Button.js';
-// import { TeaserBox } from '@backlight-dev/selection-inventory-n5vl9.blank-kztxz1qm/teaser-box/dist/TeaserBox.js';
+import { Button } from '@backlight-dev/selection-inventory-n5vl9.tsnm-ds/button/dist/Button.js';
+import { TeaserBox } from '@backlight-dev/selection-inventory-n5vl9.tsnm-ds/teaser-box/dist/TeaserBox.js';
 
 //@ts-ignore
 const Home: NextPage = ({ data }: { data: NetlifyGraph.SpotifySavedTracksQuery['data'] }) => {
@@ -26,10 +26,12 @@ const Home: NextPage = ({ data }: { data: NetlifyGraph.SpotifySavedTracksQuery['
 
         <div className={styles.grid}>
           {data?.spotify?.me?.savedTracks?.nodes.map((track: any, index: number) =>
-            <div key={index}>
-              <span>Artists: {track.artists.map((artist: any) => artist.name).join(', ')}</span>
-              <span>Track: {track.name}</span>
-            </div>
+            <TeaserBox
+              key={index}
+              topic={`Artists: ${track.artists.map((artist: any) => artist.name).join(', ')}`}
+              text={`Track: ${track.name}`}
+              darkStyle
+            />
           )}
         </div>
       </main>
@@ -37,16 +39,13 @@ const Home: NextPage = ({ data }: { data: NetlifyGraph.SpotifySavedTracksQuery['
   )
 }
   
-export async function getStaticProps({ req }: any) {
-  const accessToken = process.env.ONEGRAPH_AUTHLIFY_TOKEN;
+export async function getServerSideProps({ req }: any) {
+  const accessToken = process.env.NETLIFY_GRAPH_TOKEN;
 
   const { errors, data } = await NetlifyGraph.fetchSpotifySavedTracksQuery(
     {},
     { accessToken: accessToken }
   );
-
-  console.log('getStaticProps', errors, data);
-  console.log(`AccessToken length: ${(accessToken || "").length}`);
 
   return {
     props: {
