@@ -9,7 +9,7 @@ const Home: NextPage = ({ spotifySavedTracks }: any) =>
   <div className={styles.container}>
     <Head>
       <title>Personal page of TSNM / Jonas Ulrich</title>
-      <meta name="description" content="Personal page of TSNM / Jonas Ulrich. Music and Dev" />
+      <meta name="description" content="Personal page of TSNM / Jonas Ulrich. Musings about music and Dev" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
 
