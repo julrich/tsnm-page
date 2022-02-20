@@ -38,7 +38,7 @@ const Home: NextPage = ({ data }: { data: NetlifyGraph.SpotifySavedTracksQuery['
 }
   
 export async function getStaticProps({ req }: any) {
-  const accessToken = process.env.NETLIFY_GRAPH_TOKEN;
+  const accessToken = process.env.ONEGRAPH_AUTHLIFY_TOKEN;
 
   const { errors, data } = await NetlifyGraph.fetchSpotifySavedTracksQuery(
     {},
