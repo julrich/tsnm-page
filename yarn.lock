@@ -17,10 +17,10 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@backlight-dev/selection-inventory-n5vl9.tsnm-ds@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.npmjs.org/@backlight-dev/selection-inventory-n5vl9.tsnm-ds/-/selection-inventory-n5vl9.tsnm-ds-0.0.5.tgz#b917f4b44c20fd55f06440840213fe221647c2fc"
-  integrity sha512-pMnfFof3NTprKcxAOJx37D7TjlVU7MV0H08oqQgGJSeJ1YcbnrY2ERiLitnYIF1HFxCuy4nsvyIfCLNZadDIZA==
+"@backlight-dev/selection-inventory-n5vl9.tsnm-ds@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.npmjs.org/@backlight-dev/selection-inventory-n5vl9.tsnm-ds/-/selection-inventory-n5vl9.tsnm-ds-0.0.6.tgz#09f7ae3ebcfca47ab8811be71764ad426f73b353"
+  integrity sha512-Exuahu6ZQ2MRNNT7vOCAwsVriAhs5nmkz0Ax7tUEDoOOKFCsyXm4GFLmRIBeMtW/JwT13ztHakZmdUQFNUdbLA==
   dependencies:
     "@kickstartds/base" "^1.6.0-next.9"
     "@kickstartds/blog" "^1.6.0-next.9"

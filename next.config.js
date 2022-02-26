@@ -2,11 +2,11 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 const withTM = require("next-transpile-modules")([
+  "@backlight-dev/selection-inventory-n5vl9.tsnm-ds",
   "@kickstartds/core",
   "@kickstartds/base",
   "@kickstartds/content",
   "@kickstartds/blog",
-  "@backlight-dev/selection-inventory-n5vl9.tsnm-ds",
 ]);
 
 /** @type {import('next').NextConfig} */
