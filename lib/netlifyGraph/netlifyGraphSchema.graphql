@@ -249,6 +249,71 @@ type OneGraphCreateModifySchemaTokenResponsePayload {
   accessToken: OneGraphAccessToken!
 }
 
+input OneGraphForkGraphQLSchemaEnabledServicesChangesInput {
+  """
+  Replace services with the given list of services. Can not be combined with add or remove.
+  """
+  replace: [OneGraphServiceEnumArg!]
+
+  """Services to remove from the schema."""
+  remove: [OneGraphServiceEnumArg!]
+
+  """Services to add to the schema."""
+  add: [OneGraphServiceEnumArg!]
+}
+
+input OneGraphForkGraphQLSchemaExternalGraphQLSchemaChangesInput {
+  """The external GraphQL schemas to remove from the GraphQL schema."""
+  remove: [OneGraphGraphQLSchemaExternalGraphQLSchemaInput!]
+
+  """The external GraphQL schemas to add to the GraphQL schema."""
+  add: [OneGraphGraphQLSchemaExternalGraphQLSchemaInput!]
+}
+
+input OneGraphForkGraphQLSchemaSalesforceChangesInput {
+  """
+  Whether to create a GraphQL schema with the custom salesforce schema removed. Can not be true if `setSalesforceSchemaId` is non-null.
+  """
+  removeCustomSalesforceSchema: Boolean
+
+  """The id of a Salesforce schema to attach to the GraphQL schema."""
+  setSalesforceSchemaId: String
+}
+
+input OneGraphForkGraphQLSchemaChangesInput {
+  enabledServices: OneGraphForkGraphQLSchemaEnabledServicesChangesInput
+  externalGraphQLSchemas: OneGraphForkGraphQLSchemaExternalGraphQLSchemaChangesInput
+  salesforceSchema: OneGraphForkGraphQLSchemaSalesforceChangesInput
+}
+
+input OneGraphForkGraphQLSchemaInput {
+  """The changes to apply to the schema."""
+  changes: OneGraphForkGraphQLSchemaChangesInput!
+
+  """
+  Whether to set this schema as the default for the app. Defaults to false.
+  """
+  setAsDefaultForApp: Boolean = false
+
+  """
+  Whether to fork the default schema for the app. If `parentId is provided, this arg will be ignored.
+  """
+  forkAppDefaultSchema: Boolean = true
+
+  """
+  The optional id of the GraphQL schema to fork. If not provided, and `forkAppDefaultSchema` is set to true, the current default graphQLSchema for the app will be used. If there is no current default, then a global default graphQLSchema will be created and this schema will have no parent.
+  """
+  parentId: String
+
+  """The id of the app that the schema should belong to."""
+  appId: String!
+}
+
+type OneGraphForkGraphQLSchemaResponsePayload {
+  graphQLSchema: OneGraphGraphQLSchema!
+  app: OneGraphApp!
+}
+
 input OneGraphGraphQLSchemaExternalGraphQLSchemaInput {
   """The id of the external GraphQL schema."""
   externalGraphQLSchemaId: String!
@@ -263,7 +328,7 @@ input OneGraphCreateGraphQLSchemaInput {
   """External GraphQL schemas to add"""
   externalGraphQLSchemas: [OneGraphGraphQLSchemaExternalGraphQLSchemaInput!]
 
-  """Optional id of a Salesforce schema to attach to the app."""
+  """Optional id of a Salesforce schema to attach to the GraphQL schema."""
   salesforceSchemaId: String
 
   """The optional id of the GraphQL schema that this was derived from."""
@@ -279,7 +344,8 @@ input OneGraphCreateGraphQLSchemaInput {
 }
 
 type OneGraphCreateGraphQLSchemaResponsePayload {
-  graphqlSchema: OneGraphGraphQLSchema!
+  graphqlSchema: OneGraphGraphQLSchema! @deprecated(reason: "use graphQLSchema")
+  graphQLSchema: OneGraphGraphQLSchema!
   app: OneGraphApp!
 }
 
@@ -486,8 +552,13 @@ type OneGraphAddGoogleSiteVerificationPayload {
   googleSiteVerification: OneGraphGoogleSiteVerification!
 }
 
+type OneGraphAddSalesforceSchemaForSalesforceViewerPayload {
+  """The salesforce schema that was created."""
+  salesforceSchema: OneGraphSalesforceSchema!
+}
+
 type OneGraphAddPreviewSalesforceSchemaForSalesforceViewerPayload {
-  """The preview salesforce schema that was created."""
+  """The salesforce schema that was created."""
   salesforceSchema: OneGraphSalesforceSchema!
 }
 
@@ -559,10 +630,10 @@ type OneGraphAddPreviewSalesforceSchemaPayload {
   salesforceSchema: OneGraphSalesforceSchema!
 
   """The GraphQL schema for the app after the preview schema is applied."""
-  previewSchema: JSON!
+  previewSchema: JSON! @deprecated(reason: "Use `createGraphQLSchema`, then fetch the new schema with a http call to `/schema?schema_id={schemaId}`")
 
   """The current GraphQL schema for the app."""
-  currentSchema: JSON!
+  currentSchema: JSON! @deprecated(reason: "Use a http call to `/schema`")
 }
 
 input OneGraphRemoveExternalGraphQLSchemaInput {
@@ -703,6 +774,24 @@ type OneGraphEnableGithubRepositorySubscriptionDelegationResult {
 
   """The GitHub repository owner of app that delegation was disabled for."""
   repoOwner: String!
+}
+
+"""Scope"""
+enum OneGraphApiTokenScopeEnum {
+  MODIFY_SCHEMA
+  PERSIST_QUERY
+}
+
+input OneGraphCreateApiTokenTokenInput {
+  scopes: [OneGraphApiTokenScopeEnum!]!
+
+  """Id for the app that you will be accessible through the token."""
+  appId: String!
+}
+
+type OneGraphCreateApiTokenResponsePayload {
+  """The access token that was created"""
+  accessToken: OneGraphAccessToken!
 }
 
 input OneGraphEvictCachedPersistedQueryResultsInput {
@@ -1580,6 +1669,7 @@ type OneGraphMutation {
   createPersitQueryToken(input: OneGraphPersistedQueryTokenInput!): OneGraphCreatePersitQueryTokenResponsePayload!
   deletePersistedQuery(input: OneGraphDeletePersistedQueryInput!): OneGraphDeletePersistedQueryResponsePayload!
   evictCachedPersistedQueryResults(input: OneGraphEvictCachedPersistedQueryResultsInput!): OneGraphEvictCachedResultsResponsePayload!
+  createApiToken(input: OneGraphCreateApiTokenTokenInput!): OneGraphCreateApiTokenResponsePayload!
 
   """
   Allows non-admin users to subscribe to GitHub events on OneGraph for the given repo and app.
@@ -1627,14 +1717,15 @@ type OneGraphMutation {
   resetPassword(passwordConfirm: String!, password: String!, token: String!): Boolean!
   enableGitHubAppWebhook(input: OneGraphEnableGitHubAppWebhookInput!): OneGraphEnableGitHubAppWebhookResponsePayload!
   addExternalGraphQLSchema(input: OneGraphAddExternalGraphQLSchemaInput!): OneGraphAddExternalGraphQLSchemaPayload!
-  updateExternalGraphQLSchema(input: OneGraphUpdateExternalGraphQLSchemaInput!): OneGraphUpdateExternalGraphQLSchemaPayload!
-  removeExternalGraphQLSchema(input: OneGraphRemoveExternalGraphQLSchemaInput!): OneGraphRemoveExternalGraphQLSchemaPayload!
-  addPreviewSalesforceSchema(input: OneGraphAddPreviewSalesforceSchemaInput!): OneGraphAddPreviewSalesforceSchemaPayload!
-  promotePreviewSalesforceSchema(input: OneGraphPromotePreviewSalesforceSchemaInput!): OneGraphPromotePreviewSalesforceSchemaPayload!
+  updateExternalGraphQLSchema(input: OneGraphUpdateExternalGraphQLSchemaInput!): OneGraphUpdateExternalGraphQLSchemaPayload! @deprecated(reason: "use `createExternalGraphQLSchema` first, then `createGraphQLSchema` with the result")
+  removeExternalGraphQLSchema(input: OneGraphRemoveExternalGraphQLSchemaInput!): OneGraphRemoveExternalGraphQLSchemaPayload! @deprecated(reason: "Use createGraphQLSchema")
+  addPreviewSalesforceSchema(input: OneGraphAddPreviewSalesforceSchemaInput!): OneGraphAddPreviewSalesforceSchemaPayload! @deprecated(reason: "Use `addSalesforceSchema`, then `createGraphQLSchema`.")
+  promotePreviewSalesforceSchema(input: OneGraphPromotePreviewSalesforceSchemaInput!): OneGraphPromotePreviewSalesforceSchemaPayload! @deprecated(reason: "")
   addSalesforceSchema(input: OneGraphAddSalesforceSchemaInput!): OneGraphAddSalesforceSchemaPayload!
   updateSalesforceSchema(input: OneGraphUpdateSalesforceSchemaInput!): OneGraphUpdateSalesforceSchemaPayload!
   removeSalesforceSchema(input: OneGraphRemoveSalesforceSchemaInput!): OneGraphRemoveSalesforceSchemaPayload!
-  addPreviewSalesforceSchemaForSalesforceViewer: OneGraphAddPreviewSalesforceSchemaForSalesforceViewerPayload!
+  addPreviewSalesforceSchemaForSalesforceViewer: OneGraphAddPreviewSalesforceSchemaForSalesforceViewerPayload! @deprecated(reason: "use `addSalesforceSchemaForSalesforceViewer`, then `createGraphQLSchema`.")
+  addSalesforceSchemaForSalesforceViewer: OneGraphAddSalesforceSchemaForSalesforceViewerPayload!
   addGoogleSiteVerification(input: OneGraphAddGoogleSiteVerificationInput!): OneGraphAddGoogleSiteVerificationPayload!
   removeGoogleSiteVerification(input: OneGraphRemoveGoogleSiteVerificationInput!): OneGraphRemoveGoogleSiteVerificationPayload!
   addSlackEventWebhook(input: OneGraphAddSlackEventWebhookInput!): OneGraphAddSlackEventWebhookPayload!
@@ -1650,6 +1741,7 @@ type OneGraphMutation {
   """Creates an empty personal token with a Netlify site anchor"""
   createPersonalTokenWithNetlifySiteAnchor(input: OneGraphCreatePersonalTokenWithNetlifySiteAnchorInput!): OneGraphCreatePersonalTokenWithNetlifySiteAnchorResponsePayload!
   createGraphQLSchema(input: OneGraphCreateGraphQLSchemaInput!): OneGraphCreateGraphQLSchemaResponsePayload!
+  forkGraphQLSchema(input: OneGraphForkGraphQLSchemaInput!): OneGraphForkGraphQLSchemaResponsePayload!
   createModifySchemaToken(input: OneGraphModifySchemaTokenInput!): OneGraphCreateModifySchemaTokenResponsePayload!
 
   """
@@ -2368,7 +2460,7 @@ type OneGraphSalesforceSchema {
   salesforceOrgId: String
 
   """Whether this is a preview of a change to a Salesforce schema."""
-  isPreview: Boolean!
+  isPreview: Boolean! @deprecated(reason: "There is no longer a distinction between preview and non-preview salesforce schemas. Use `createGraphQLSchema` with `salesforceSchemaId` to get a schema you can test with.")
 
   """The previous salesforce schema, if there was one."""
   previousSalesforceSchema: OneGraphSalesforceSchema
@@ -5284,10 +5376,10 @@ type OneGraphApp {
   authGuardianSlackIntegrationEnabled: Boolean!
 
   """External GraphQL schemas for the app."""
-  externalGraphQLSchemas: OneGraphExternalGraphQLSchemaConnection!
+  externalGraphQLSchemas: OneGraphExternalGraphQLSchemaConnection! @deprecated(reason: "use graphQLSchema.externalGraphQLSchemas")
 
-  """Custom Salesforce schema for the app."""
-  salesforceSchema: OneGraphSalesforceSchema
+  """Custom Salesforce schema on the app's default graphQLSchema."""
+  salesforceSchema: OneGraphSalesforceSchema @deprecated(reason: "use graphQLSchema.salesforceSchema")
 
   """
   The domain that must be authorized to receive push notifications from Google for Google Calendar subscriptions.

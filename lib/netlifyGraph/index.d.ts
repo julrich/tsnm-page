@@ -23,7 +23,14 @@ export type GraphQLError = {
   extensions: Record<string, unknown>;
 };
 
-export type ExampleQuery = {
+export type SpotifyArtistCoverQueryInput = {
+  /**
+   * The artist id
+   */
+  artistId?: string;
+};
+
+export type SpotifyArtistCoverQuery = {
   /**
    * Any data from the function will be returned here
    */
@@ -32,30 +39,28 @@ export type ExampleQuery = {
      * The root for Spotify queries
      */
     spotify: {
-      me: {
+      artist: {
         /**
-         * Get a list of the songs saved in the current Spotify user’s ‘Your Music’ library.
+         * Images of the artist in various sizes, widest first.
          */
-        savedTracks: {
+        images: Array<{
           /**
-           * SavedTracks
+           * The image height in pixels. If unknown: `null` or not returned.
            */
-          nodes: Array<{
-            /**
-             * The name of the track.
-             */
-            name: string;
-            /**
-             * The artists who performed the track. Each artist object includes a link in href to more detailed information about the artist.
-             */
-            artists: Array<{
-              /**
-               * The name of the artist.
-               */
-              name: string;
-            }>;
-          }>;
-        };
+          height: number;
+          /**
+           * The source URL of the image.
+           */
+          url: string;
+          /**
+           * The image width in pixels. If unknown: `null` or not returned.
+           */
+          width: number;
+        }>;
+        /**
+         * A list of the genres the artist is associated with. For example: "Prog Rock" , "Post-Grunge". (If not yet classified, the array is empty.)
+         */
+        genres: Array<string>;
       };
     };
   };
@@ -66,15 +71,12 @@ export type ExampleQuery = {
 };
 
 /**
- * An example query to start with.
+ * Query to get cover image for an artist
  */
-export function fetchExampleQuery(
-  /**
-   * Pass `{}` as no variables are defined for this function.
-   */
-  variables: Record<string, never>,
+export function fetchSpotifyArtistCoverQuery(
+  variables: SpotifyArtistCoverQueryInput,
   options?: NetlifyGraphFunctionOptions
-): Promise<ExampleQuery>;
+): Promise<SpotifyArtistCoverQuery>;
 
 export type SpotifySavedTracksQuery = {
   /**
@@ -106,6 +108,10 @@ export type SpotifySavedTracksQuery = {
                * The name of the artist.
                */
               name: string;
+              /**
+               * The Spotify ID for the artist.
+               */
+              id: string;
             }>;
           }>;
         };
@@ -119,7 +125,7 @@ export type SpotifySavedTracksQuery = {
 };
 
 /**
- * An empty query to start from
+ * Query saved tracks from Spotify
  */
 export function fetchSpotifySavedTracksQuery(
   /**

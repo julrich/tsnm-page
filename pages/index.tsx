@@ -6,9 +6,10 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
 import { TeaserBox } from '@backlight-dev/selection-inventory-n5vl9.tsnm-ds/teaser-box/dist/TeaserBox.js';
+import { Section } from '@backlight-dev/selection-inventory-n5vl9.tsnm-ds/section/dist/Section.js';
 
 //@ts-ignore
-const Home: NextPage = ({ data }: { data: NetlifyGraph.SpotifySavedTracksQuery['data'] }) => {
+const Home: NextPage = ({ tracks }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -25,17 +26,18 @@ const Home: NextPage = ({ data }: { data: NetlifyGraph.SpotifySavedTracksQuery['
 
         <h2>Have a look at the last songs I&apos;ve saved on Spotify:</h2>
 
-        <div className={styles.grid}>
-          {data?.spotify?.me?.savedTracks?.nodes.map((track: any, index: number) =>
+        <Section mode="default" width="wide">
+          {tracks.map((track: any, index: number) =>
             <TeaserBox
-             ratio="16:9"
-             key={index}
-             topic={`Artists: ${track.artists.map((artist: any) => artist.name).join(', ')}`}
-             text={`Track: ${track.name}`}
-             darkStyle
+              image={track.cover}
+              ratio="1:1"
+              key={index}
+              topic={track.artists}
+              text={`**Track**: ${track.title}\n\n---\n\n**Genre**: ${track.genres}`}
+              darkStyle
            />
           )}
-        </div>
+        </Section>
       </main>
     </div>
   )
@@ -44,14 +46,30 @@ const Home: NextPage = ({ data }: { data: NetlifyGraph.SpotifySavedTracksQuery['
 export async function getStaticProps({ req }: any) {
   const accessToken = process.env.ONEGRAPH_AUTHLIFY_TOKEN;
 
-  const { errors, data } = await NetlifyGraph.fetchSpotifySavedTracksQuery(
+  const { errors: savedTracksErrors, data: savedTracksData } = await NetlifyGraph.fetchSpotifySavedTracksQuery(
     {},
     { accessToken: accessToken }
   );
 
+  const tracks = await Promise.all(savedTracksData.spotify?.me?.savedTracks.nodes?.map(async (track) => {
+    const { errors: coverErrors, data: coverData } = await NetlifyGraph.fetchSpotifyArtistCoverQuery(
+      {
+        artistId: track.artists[0].id
+      },
+      { accessToken: accessToken }
+    );  
+
+    return {
+      artists: track.artists.map((artist) => artist.name).join(', '),
+      title: track.name,
+      cover: coverData.spotify.artist.images[0].url,
+      genres: coverData.spotify.artist.genres.join(', '),
+    }
+  }));
+
   return {
     props: {
-      data,
+      tracks
     },
   };
 }

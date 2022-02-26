@@ -17,15 +17,16 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@backlight-dev/selection-inventory-n5vl9.tsnm-ds@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.npmjs.org/@backlight-dev/selection-inventory-n5vl9.tsnm-ds/-/selection-inventory-n5vl9.tsnm-ds-0.0.6.tgz#09f7ae3ebcfca47ab8811be71764ad426f73b353"
-  integrity sha512-Exuahu6ZQ2MRNNT7vOCAwsVriAhs5nmkz0Ax7tUEDoOOKFCsyXm4GFLmRIBeMtW/JwT13ztHakZmdUQFNUdbLA==
+"@backlight-dev/selection-inventory-n5vl9.tsnm-ds@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.npmjs.org/@backlight-dev/selection-inventory-n5vl9.tsnm-ds/-/selection-inventory-n5vl9.tsnm-ds-0.0.7.tgz#e466f1cdeb5a3abb2ba4960cbcfef3b214f1d948"
+  integrity sha512-CaOuNkL7ovJ8ROqC7LUnntcNULcPsmPv4IMf5FaLhJXLTlMhWFWbSrhaNqr20jlGif9V6s4T3JBEyk7eJZsQQA==
   dependencies:
     "@kickstartds/base" "^1.6.0-next.9"
     "@kickstartds/blog" "^1.6.0-next.9"
     "@kickstartds/content" "^1.6.0-next.9"
     "@kickstartds/core" "^1.6.0-next.9"
+    classnames "^2.3.1"
     react "^17.0.2"
     react-dom "^17.0.2"
     react-markdown "^8.0.0"
@@ -556,7 +557,7 @@ ci-info@^2.0.0:
   resolved "https://registry.npmjs.org/ci-info/-/ci-info-2.0.0.tgz#67a9e964be31a51e15e5010d58e6f12834002f46"
   integrity sha512-5tK7EtrZ0N+OLFMthtqOj4fI2Jeb88C4CAZPu25LDVUgXJ0A3Js4PMGqrn0JU1W0Mh1/Z8wZzYPxqUrXeBboCQ==
 
-classnames@^2.2.6:
+classnames@^2.2.6, classnames@^2.3.1:
   version "2.3.1"
   resolved "https://registry.npmjs.org/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
   integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==

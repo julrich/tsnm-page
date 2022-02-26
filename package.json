@@ -10,7 +10,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@backlight-dev/selection-inventory-n5vl9.tsnm-ds": "^0.0.6",
+    "@backlight-dev/selection-inventory-n5vl9.tsnm-ds": "^0.0.7",
     "@next/bundle-analyzer": "^12.1.0",
     "netlify-graph-auth": "^0.0.3",
     "next": "12.1.0",
