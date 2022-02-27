@@ -3,28 +3,27 @@ import type { NextPage } from 'next';
 import Head from "next/head";
 import Image from 'next/image';
 
-import styles from '../styles/Home.module.css';
-
 import { TeaserBox } from '@backlight-dev/selection-inventory-n5vl9.tsnm-ds/teaser-box/dist/TeaserBox.js';
 import { Section } from '@backlight-dev/selection-inventory-n5vl9.tsnm-ds/section/dist/Section.js';
 
 //@ts-ignore
 const Home: NextPage = ({ tracks }) => {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Personal page of TSNM / Jonas Ulrich</title>
         <meta name="description" content="Personal page of TSNM / Jonas Ulrich. Musings about music and Dev" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <div className="logo">
-          <Image className="logo__image" src="https://i1.sndcdn.com/avatars-000003159261-cat82d-t200x200.jpg" alt="tsnm Logo" width={90} height={90} />
-          <span className="logo__text">Personal homepage of TSNM / Jonas Ulrich</span>
-        </div>
-
-        <h2>Have a look at the last songs I&apos;ve saved on Spotify:</h2>
+      <main>
+        <Section mode="list" width="wide">
+          <div className="logo">
+            <Image className="logo__image" src="https://i1.sndcdn.com/avatars-000003159261-cat82d-t200x200.jpg" alt="tsnm Logo" width={90} height={90} />
+            <span className="logo__text">Personal homepage of TSNM / Jonas Ulrich</span>
+          </div>
+          <h2>Have a look at the last songs I&apos;ve saved on Spotify:</h2>
+        </Section>
 
         <Section mode="default" width="wide">
           {tracks.map((track: any, index: number) =>
