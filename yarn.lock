@@ -17,16 +17,17 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@backlight-dev/selection-inventory-n5vl9.tsnm-ds@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.npmjs.org/@backlight-dev/selection-inventory-n5vl9.tsnm-ds/-/selection-inventory-n5vl9.tsnm-ds-0.0.7.tgz#e466f1cdeb5a3abb2ba4960cbcfef3b214f1d948"
-  integrity sha512-CaOuNkL7ovJ8ROqC7LUnntcNULcPsmPv4IMf5FaLhJXLTlMhWFWbSrhaNqr20jlGif9V6s4T3JBEyk7eJZsQQA==
+"@backlight-dev/selection-inventory-n5vl9.tsnm-ds@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.npmjs.org/@backlight-dev/selection-inventory-n5vl9.tsnm-ds/-/selection-inventory-n5vl9.tsnm-ds-0.0.10.tgz#5999ad11468f04d4579d43a33494fa3e41044d1f"
+  integrity sha512-atwwf1G9s+ip20ocBHmygDWLqmkeRu46K1tpSNvu9hVS/w43meM3dd6OFUvMWFOowc2MUN3NuKiVbyWJjq8Bqw==
   dependencies:
     "@kickstartds/base" "^1.6.0-next.9"
     "@kickstartds/blog" "^1.6.0-next.9"
     "@kickstartds/content" "^1.6.0-next.9"
     "@kickstartds/core" "^1.6.0-next.9"
     classnames "^2.3.1"
+    include-media "^1.4.10"
     react "^17.0.2"
     react-dom "^17.0.2"
     react-markdown "^8.0.0"
@@ -1406,6 +1407,11 @@ imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.npmjs.org/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
   integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
+
+include-media@^1.4.10:
+  version "1.4.10"
+  resolved "https://registry.npmjs.org/include-media/-/include-media-1.4.10.tgz#7a311c92c396c808504ec6a5365115d30571f259"
+  integrity sha512-TymQzKF7oWHbItEcEHOCponZ90lRr1I9QbYeD+qCxXy4Z0/pSpS4Ocz2bq3FMOERlXXrY9Sawsh9GjiObVQA6A==
 
 indent-string@^4.0.0:
   version "4.0.0"

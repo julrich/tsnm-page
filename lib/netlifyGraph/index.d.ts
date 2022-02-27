@@ -23,6 +23,65 @@ export type GraphQLError = {
   extensions: Record<string, unknown>;
 };
 
+export type GithubStarredReposQuery = {
+  /**
+   * Any data from the function will be returned here
+   */
+  data: {
+    gitHub: {
+      /**
+       * Lookup a user by login.
+       */
+      user: {
+        /**
+         * Repositories the user has starred.
+         */
+        starredRepositories: {
+          /**
+           * A list of edges.
+           */
+          edges: Array<{
+            node: {
+              /**
+               * The repository's name with owner.
+               */
+              nameWithOwner: string;
+              /**
+               * The HTTP URL for this repository
+               */
+              url: string;
+              /**
+  * Returns a count of how many stargazers there are on this object
+
+  */
+              stargazerCount: number;
+              /**
+               * The description of the repository.
+               */
+              description: string;
+            };
+          }>;
+        };
+      };
+    };
+  };
+  /**
+   * Any errors from the function will be returned here
+   */
+  errors: Array<GraphQLError>;
+};
+
+/**
+ * An empty query to start from
+ */
+export function fetchGithubStarredReposQuery(
+  /**
+   * Pass `{}` as no variables are defined for this function.
+   */
+  variables: Record<string, never>,
+  options?: NetlifyGraphFunctionOptions
+): Promise<GithubStarredReposQuery>;
+
 export type SpotifyArtistCoverQueryInput = {
   /**
    * The artist id
@@ -113,6 +172,23 @@ export type SpotifySavedTracksQuery = {
                */
               id: string;
             }>;
+            /**
+             * A link to a 30 second preview (MP3 format) of the track. Can be null
+             */
+            previewUrl: string;
+            /**
+             * The track length in milliseconds.
+             */
+            durationMs: number;
+            /**
+             * Known external URLs for this track.
+             */
+            externalUrls: {
+              /**
+               * The Spotify URL for the object.
+               */
+              spotify: string;
+            };
           }>;
         };
       };
