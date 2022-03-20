@@ -52,7 +52,7 @@ const Coding: NextPage = ({ story: initialStory, repositories }) => {
   )
 }
   
-export async function getStaticProps({ req, preview = false }: any) {
+export async function getStaticProps({ preview = false }: any) {
   const accessToken = process.env.ONEGRAPH_AUTHLIFY_TOKEN;
   const repositories = await NetlifyGraph.fetchGithubStarredReposQuery(
     {},
@@ -61,7 +61,7 @@ export async function getStaticProps({ req, preview = false }: any) {
 
   const storyblokApi = getStoryblokApi()
   let { data } = await storyblokApi.get(`cdn/stories/coding`, {
-    version: "draft"
+    version: "published"
   });
 
   return {

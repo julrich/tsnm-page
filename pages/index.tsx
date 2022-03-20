@@ -74,16 +74,18 @@ const Home: NextPage = ({ story: initialStory, tracks, repositories }) => {
   )
 };
   
-export async function getStaticProps({ req, preview = false }: any) {
+export async function getStaticProps({ preview = false }: any) {
   const accessToken = process.env.ONEGRAPH_AUTHLIFY_TOKEN;
 
-  const { errors: _, data: savedTracksData } = await NetlifyGraph.fetchSpotifySavedTracksQuery(
+  const { data: savedTracksData } = await NetlifyGraph.fetchSpotifySavedTracksQuery(
     {},
     { accessToken: accessToken }
   );
 
+  console.log('savedTracksData', savedTracksData);
+
   const tracks = await Promise.all(savedTracksData.spotify?.me?.savedTracks.nodes?.map(async (track) => {
-    const { errors: _, data: coverData } = await NetlifyGraph.fetchSpotifyArtistCoverQuery(
+    const { data: coverData } = await NetlifyGraph.fetchSpotifyArtistCoverQuery(
       {
         artistId: track.artists[0].id
       },
@@ -109,7 +111,7 @@ export async function getStaticProps({ req, preview = false }: any) {
 
   const storyblokApi = getStoryblokApi()
   let { data } = await storyblokApi.get(`cdn/stories/home`, {
-    version: "draft"
+    version: "published"
   });
 
   return {

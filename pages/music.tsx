@@ -51,7 +51,7 @@ const Music: NextPage = ({ story: initialStory, tracks }) => {
   )
 };
   
-export async function getStaticProps({ req, preview = false }: any) {
+export async function getStaticProps({ preview = false }: any) {
   const accessToken = process.env.ONEGRAPH_AUTHLIFY_TOKEN;
 
   const { errors: _, data: savedTracksData } = await NetlifyGraph.fetchSpotifySavedTracksQuery(
@@ -81,7 +81,7 @@ export async function getStaticProps({ req, preview = false }: any) {
 
   const storyblokApi = getStoryblokApi()
   let { data } = await storyblokApi.get(`cdn/stories/music`, {
-    version: "draft"
+    version: "published"
   });
   
   return {
