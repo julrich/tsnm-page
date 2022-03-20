@@ -59,14 +59,10 @@ export async function getStaticProps({ preview = false }: any) {
     { accessToken: accessToken }
   )
 
-  console.log('repositories index', repositories);
-
   const storyblokApi = getStoryblokApi()
   let { data } = await storyblokApi.get(`cdn/stories/coding`, {
     version: "published"
   });
-
-  console.log('story coding', data);
 
   return {
     props: {
