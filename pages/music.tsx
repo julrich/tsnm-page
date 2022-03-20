@@ -3,19 +3,18 @@ import type { NextPage } from 'next';
 import Head from "next/head";
 import { useStoryblokState, getStoryblokApi, StoryblokComponent } from "@storyblok/react";
 
-import { TeaserBox } from '@backlight-dev/selection-inventory-n5vl9.tsnm-ds/teaser-box/dist/TeaserBox.js';
 import { TrackTeaserBox } from '@backlight-dev/selection-inventory-n5vl9.tsnm-ds/track-teaser-box/dist/TrackTeaserBox.js';
 import { Section } from '@backlight-dev/selection-inventory-n5vl9.tsnm-ds/section/dist/Section.js';
 
 //@ts-ignore
-const Home: NextPage = ({ story: initialStory, tracks, repositories }) => {
+const Music: NextPage = ({ story: initialStory, tracks }) => {
   const story = useStoryblokState(initialStory);
 
   return (
     <>
       <Head>
-        <title>Personal page of TSNM / Jonas Ulrich</title>
-        <meta name="description" content="Personal page of TSNM / Jonas Ulrich. Musings about music and Dev" />
+        <title>Music page of TSNM / Jonas Ulrich</title>
+        <meta name="description" content="Music page of TSNM / Jonas Ulrich. Everything I love about music" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -45,28 +44,6 @@ const Home: NextPage = ({ story: initialStory, tracks, repositories }) => {
             text={`**Artist**: ${track.artist}`}
             darkStyle
             preview={track.preview}
-          />
-        )}
-      </Section>
-
-      <Section mode="slider" width="max" headline={{
-        level: 'h2',
-        styleAs: 'h3',
-        align: 'left',
-        content: "... or have a look at the last repositories I've saved on Github",
-      }}>
-        {repositories.map((repository: any, index: number) =>
-          <TeaserBox
-            ratio="16:9"
-            key={index}
-            topic={repository.node.nameWithOwner}
-            text={`**Description**: ${repository.node.description || '*No description*'}\n\n---\n\n**Stars**: ${repository.node.stargazerCount}`}
-            link={{
-              label: 'Open on Github',
-              size: 'medium',
-              variant: 'outline',
-              href: repository.node.url,
-            }}
           />
         )}
       </Section>
@@ -102,20 +79,14 @@ export async function getStaticProps({ req, preview = false }: any) {
     }
   }));
 
-  const repositories = await NetlifyGraph.fetchGithubStarredReposQuery(
-    {},
-    { accessToken: accessToken }
-  )
-
   const storyblokApi = getStoryblokApi()
-  let { data } = await storyblokApi.get(`cdn/stories/home`, {
+  let { data } = await storyblokApi.get(`cdn/stories/music`, {
     version: "draft"
   });
-
+  
   return {
     props: {
       tracks,
-      repositories: repositories.data.gitHub.user.starredRepositories.edges,
       story: data ? data.story : false,
       preview,
     },
@@ -123,4 +94,4 @@ export async function getStaticProps({ req, preview = false }: any) {
   };
 }
 
-export default Home;
+export default Music;

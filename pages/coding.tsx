@@ -4,18 +4,17 @@ import Head from "next/head";
 import { useStoryblokState, getStoryblokApi, StoryblokComponent } from "@storyblok/react";
 
 import { TeaserBox } from '@backlight-dev/selection-inventory-n5vl9.tsnm-ds/teaser-box/dist/TeaserBox.js';
-import { TrackTeaserBox } from '@backlight-dev/selection-inventory-n5vl9.tsnm-ds/track-teaser-box/dist/TrackTeaserBox.js';
 import { Section } from '@backlight-dev/selection-inventory-n5vl9.tsnm-ds/section/dist/Section.js';
 
 //@ts-ignore
-const Home: NextPage = ({ story: initialStory, tracks, repositories }) => {
+const Coding: NextPage = ({ story: initialStory, repositories }) => {
   const story = useStoryblokState(initialStory);
 
   return (
     <>
       <Head>
-        <title>Personal page of TSNM / Jonas Ulrich</title>
-        <meta name="description" content="Personal page of TSNM / Jonas Ulrich. Musings about music and Dev" />
+        <title>Coding page of TSNM / Jonas Ulrich</title>
+        <meta name="description" content="Coding page of TSNM / Jonas Ulrich. Everything I love about coding" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -26,27 +25,6 @@ const Home: NextPage = ({ story: initialStory, tracks, repositories }) => {
         content: 'Content injected through Storyblok',
       }}>
         {story.content && <StoryblokComponent blok={story.content} />}
-      </Section>
-
-      <Section mode="default" spaceAfter="none" background="default" width="max" headline={{
-        level: 'h2',
-        styleAs: 'h3',
-        align: 'left',
-        content: "Have a look at the last songs I've saved on Spotify...",
-      }} />
- 
-      <Section mode="slider" background="dark" width="max">
-        {tracks.map((track: any, index: number) =>
-          <TrackTeaserBox
-            image={track.cover}
-            ratio="1:1"
-            key={index}
-            topic={track.title}
-            text={`**Artist**: ${track.artist}`}
-            darkStyle
-            preview={track.preview}
-          />
-        )}
       </Section>
 
       <Section mode="slider" width="max" headline={{
@@ -72,55 +50,28 @@ const Home: NextPage = ({ story: initialStory, tracks, repositories }) => {
       </Section>
     </>
   )
-};
+}
   
 export async function getStaticProps({ req, preview = false }: any) {
   const accessToken = process.env.ONEGRAPH_AUTHLIFY_TOKEN;
-
-  const { errors: _, data: savedTracksData } = await NetlifyGraph.fetchSpotifySavedTracksQuery(
-    {},
-    { accessToken: accessToken }
-  );
-
-  const tracks = await Promise.all(savedTracksData.spotify?.me?.savedTracks.nodes?.map(async (track) => {
-    const { errors: _, data: coverData } = await NetlifyGraph.fetchSpotifyArtistCoverQuery(
-      {
-        artistId: track.artists[0].id
-      },
-      { accessToken: accessToken }
-    );  
-
-    return {
-      artists: track.artists.map((artist) => artist.name).join(', '),
-      artist: track.artists[0].name,
-      title: track.name,
-      cover: coverData.spotify.artist.images[0].url,
-      genres: coverData.spotify.artist.genres.join(', '),
-      link: track.externalUrls.spotify,
-      length: track.durationMs,
-      preview: track.previewUrl,
-    }
-  }));
-
   const repositories = await NetlifyGraph.fetchGithubStarredReposQuery(
     {},
     { accessToken: accessToken }
   )
 
   const storyblokApi = getStoryblokApi()
-  let { data } = await storyblokApi.get(`cdn/stories/home`, {
+  let { data } = await storyblokApi.get(`cdn/stories/coding`, {
     version: "draft"
   });
 
   return {
     props: {
-      tracks,
-      repositories: repositories.data.gitHub.user.starredRepositories.edges,
       story: data ? data.story : false,
       preview,
+      repositories: repositories.data.gitHub.user.starredRepositories.edges,
     },
     revalidate: 3600,
   };
 }
 
-export default Home;
+export default Coding;

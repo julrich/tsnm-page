@@ -18,6 +18,15 @@ const nextConfig = withTM(
     },
     target: 'serverless',
     generateBuildId: () => "build",
+    trailingSlash: true,
+    async rewrites() {
+      return [
+        {
+          source: '/home',
+          destination: '/',
+        },
+      ]
+    },
   })
 );
 
