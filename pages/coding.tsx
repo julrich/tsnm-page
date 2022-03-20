@@ -74,7 +74,6 @@ export async function getStaticProps({ preview = false }: any) {
       preview,
       repositories: repositories?.data?.gitHub?.user?.starredRepositories?.edges,
     },
-    revalidate: 3600,
   };
 }
 

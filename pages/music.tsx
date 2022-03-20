@@ -96,7 +96,6 @@ export async function getStaticProps({ preview = false }: any) {
       story: data ? data.story : false,
       preview,
     },
-    revalidate: 3600,
   };
 }
 
