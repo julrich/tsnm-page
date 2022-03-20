@@ -59,16 +59,20 @@ export async function getStaticProps({ preview = false }: any) {
     { accessToken: accessToken }
   )
 
+  console.log('repositories index', repositories);
+
   const storyblokApi = getStoryblokApi()
   let { data } = await storyblokApi.get(`cdn/stories/coding`, {
     version: "published"
   });
 
+  console.log('story coding', data);
+
   return {
     props: {
       story: data ? data.story : false,
       preview,
-      repositories: repositories.data.gitHub.user.starredRepositories.edges,
+      repositories: repositories?.data?.gitHub?.user?.starredRepositories?.edges,
     },
     revalidate: 3600,
   };

@@ -59,7 +59,9 @@ export async function getStaticProps({ preview = false }: any) {
     { accessToken: accessToken }
   );
 
-  const tracks = await Promise.all(savedTracksData.spotify?.me?.savedTracks.nodes?.map(async (track) => {
+  console.log('savedTracksData music', savedTracksData);
+
+  const tracks = await Promise.all(savedTracksData?.spotify?.me?.savedTracks.nodes?.map(async (track) => {
     const { errors: _, data: coverData } = await NetlifyGraph.fetchSpotifyArtistCoverQuery(
       {
         artistId: track.artists[0].id
@@ -79,10 +81,14 @@ export async function getStaticProps({ preview = false }: any) {
     }
   }));
 
+  console.log('tracks index', tracks);
+
   const storyblokApi = getStoryblokApi()
   let { data } = await storyblokApi.get(`cdn/stories/music`, {
     version: "published"
   });
+
+  console.log('story music', data);
   
   return {
     props: {
