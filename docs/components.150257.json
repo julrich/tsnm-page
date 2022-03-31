@@ -1,0 +1,402 @@
+{
+  "components": [
+    {
+      "name": "button",
+      "display_name": "Button",
+      "created_at": "2022-03-13T17:15:25.197Z",
+      "updated_at": "2022-03-13T17:19:22.692Z",
+      "id": 2268832,
+      "schema": {
+        "label": {
+          "type": "text",
+          "max_length": "50",
+          "required": true,
+          "display_name": "Label",
+          "default_value": "Lorem",
+          "description": "Choose a label for the button"
+        },
+        "size": {
+          "type": "option",
+          "use_uuid": true,
+          "options": [
+            {
+              "value": "small",
+              "name": "Small"
+            },
+            {
+              "value": "medium",
+              "name": "Medium"
+            },
+            {
+              "value": "large",
+              "name": "Large"
+            }
+          ],
+          "default_value": "medium",
+          "description": "Choose a button size",
+          "display_name": "Size"
+        },
+        "variant": {
+          "type": "option",
+          "use_uuid": true,
+          "options": [
+            {
+              "value": "solid",
+              "name": "Solid"
+            },
+            {
+              "value": "solid-inverted",
+              "name": "Solid Inverted"
+            },
+            {
+              "value": "outline",
+              "name": "Outline"
+            },
+            {
+              "value": "outline-inverted",
+              "name": "Outline Inverted"
+            },
+            {
+              "value": "clear",
+              "name": "Clear"
+            },
+            {
+              "value": "ghost",
+              "name": "Ghost"
+            }
+          ],
+          "description": "Choose a variant of button",
+          "display_name": "Variant",
+          "default_value": "solid"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": "",
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Button",
+      "component_group_uuid": null,
+      "color": null,
+      "icon": null
+    },
+    {
+      "name": "feature",
+      "display_name": null,
+      "created_at": "2022-03-13T11:21:10.414Z",
+      "updated_at": "2022-03-13T11:21:10.414Z",
+      "id": 2268591,
+      "schema": {
+        "name": {
+          "type": "text"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "feature",
+      "component_group_uuid": null,
+      "color": null,
+      "icon": null
+    },
+    {
+      "name": "grid",
+      "display_name": null,
+      "created_at": "2022-03-13T11:21:10.398Z",
+      "updated_at": "2022-03-13T11:21:10.398Z",
+      "id": 2268590,
+      "schema": {
+        "columns": {
+          "type": "bloks"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "grid",
+      "component_group_uuid": null,
+      "color": null,
+      "icon": null
+    },
+    {
+      "name": "page",
+      "display_name": null,
+      "created_at": "2022-03-13T11:21:10.366Z",
+      "updated_at": "2022-03-13T11:21:10.366Z",
+      "id": 2268588,
+      "schema": {
+        "body": {
+          "type": "bloks"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": true,
+      "preview_tmpl": null,
+      "is_nestable": false,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "page",
+      "component_group_uuid": null,
+      "color": null,
+      "icon": null
+    },
+    {
+      "name": "section",
+      "display_name": null,
+      "created_at": "2022-03-13T17:41:30.829Z",
+      "updated_at": "2022-03-13T18:03:03.329Z",
+      "id": 2268839,
+      "schema": {
+        "mode": {
+          "type": "option",
+          "use_uuid": true,
+          "options": [
+            {
+              "value": "default",
+              "name": "Default"
+            },
+            {
+              "value": "list",
+              "name": "List"
+            },
+            {
+              "value": "tile",
+              "name": "Tile"
+            },
+            {
+              "value": "slider",
+              "name": "Slider"
+            }
+          ],
+          "description": "Choose mode that is used to layout the content of the section",
+          "display_name": "Mode",
+          "default_value": "default",
+          "pos": 0
+        },
+        "background": {
+          "type": "option",
+          "use_uuid": true,
+          "options": [
+            {
+              "value": "default",
+              "name": "Default"
+            },
+            {
+              "value": "accent",
+              "name": "Accent"
+            },
+            {
+              "value": "dark",
+              "name": "Dark"
+            }
+          ],
+          "description": "Choose the background for the section",
+          "display_name": "Background",
+          "default_value": "default",
+          "pos": 1
+        },
+        "blocks": {
+          "type": "bloks",
+          "description": "Add content to the section here",
+          "display_name": "Blocks",
+          "default_value": "",
+          "pos": 2
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "section",
+      "component_group_uuid": null,
+      "color": null,
+      "icon": null
+    },
+    {
+      "name": "teaser",
+      "display_name": null,
+      "created_at": "2022-03-13T11:21:10.382Z",
+      "updated_at": "2022-03-13T11:21:10.382Z",
+      "id": 2268589,
+      "schema": {
+        "headline": {
+          "type": "text"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "teaser",
+      "component_group_uuid": null,
+      "color": null,
+      "icon": null
+    },
+    {
+      "name": "track-teaser-box",
+      "display_name": null,
+      "created_at": "2022-03-13T17:33:18.604Z",
+      "updated_at": "2022-03-13T17:36:08.013Z",
+      "id": 2268836,
+      "schema": {
+        "topic": {
+          "type": "text",
+          "max_length": "90",
+          "required": true,
+          "display_name": "Topic",
+          "default_value": "Bussin",
+          "regex": "",
+          "description": "Enter the topic / track title"
+        },
+        "text": {
+          "type": "text",
+          "default_value": "Artist: Nicki Minaj",
+          "display_name": "Artist",
+          "description": "Enter the artist for the displayed track",
+          "max_length": "90"
+        },
+        "image": {
+          "type": "asset",
+          "filetypes": [
+            "images"
+          ],
+          "description": "Choose image for the track"
+        },
+        "preview": {
+          "type": "asset",
+          "filetypes": [
+            "audios"
+          ],
+          "description": "Select audio file for preview",
+          "display_name": "Preview"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "track-teaser-box",
+      "component_group_uuid": null,
+      "color": null,
+      "icon": null
+    },
+    {
+      "name": "visual",
+      "display_name": null,
+      "created_at": "2022-03-14T16:45:17.089Z",
+      "updated_at": "2022-03-19T12:44:42.916Z",
+      "id": 2271129,
+      "schema": {
+        "headline": {
+          "type": "text",
+          "pos": 0
+        },
+        "text": {
+          "type": "textarea",
+          "pos": 1
+        },
+        "horizontal": {
+          "type": "option",
+          "use_uuid": true,
+          "options": [
+            {
+              "value": "left",
+              "name": "Left"
+            },
+            {
+              "value": "center",
+              "name": "Center"
+            },
+            {
+              "value": "right",
+              "name": "Right"
+            }
+          ],
+          "default_value": "left",
+          "pos": 2
+        },
+        "height": {
+          "type": "text",
+          "pos": 3
+        },
+        "tab-a5184fcc-375c-4ebd-9c29-cc396a02fcb0": {
+          "type": "tab",
+          "display_name": "Box",
+          "keys": [
+            "headline",
+            "text",
+            "orientation",
+            "horizontal",
+            "vertical"
+          ],
+          "pos": 4
+        },
+        "tab-58e25885-afd9-4f87-8457-27de2d640eae": {
+          "type": "tab",
+          "display_name": "Media",
+          "keys": [
+            "image"
+          ],
+          "pos": 5
+        },
+        "image": {
+          "type": "asset",
+          "filetypes": [
+            "images"
+          ],
+          "pos": 6
+        },
+        "vertical": {
+          "type": "option",
+          "use_uuid": true,
+          "default_value": "center",
+          "options": [
+            {
+              "value": "top",
+              "name": "Top"
+            },
+            {
+              "value": "center",
+              "name": "Center"
+            },
+            {
+              "value": "bottom",
+              "name": "Bottom"
+            }
+          ]
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "visual",
+      "component_group_uuid": null,
+      "color": null,
+      "icon": null
+    }
+  ]
+}
